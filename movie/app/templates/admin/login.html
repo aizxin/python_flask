@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/static/admin/css/login.css">
+</head>
+
+<body class="beg-login-bg">
+    <div class="beg-login-box">
+        <header>
+            <h1>后台登录</h1>
+        </header>
+        <div class="beg-login-main layui-form">
+            <form class="layui-form">
+                {{ form.csrf_token }}
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                        <i class="layui-icon"></i>
+                    </label>
+                    <input type="text" name="username" lay-verify="required" autocomplete="off" placeholder="管理员账号" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <label class="beg-login-icon">
+                        <i class="layui-icon"></i>
+                    </label>
+                    <input type="password" name="password" lay-verify="required|password" autocomplete="off" placeholder="管理员密码" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <div class="">
+                        <button class="layui-input layui-btn layui-btn-primary" lay-submit="" lay-filter="login" style="color:#fff">
+                            登&nbsp;&nbsp;&nbsp;&nbsp;录
+                        </button>
+                    </div>
+                    <div class="beg-clear"></div>
+                </div>
+            </form>
+        </div>
+<<<<<<< HEAD
+        <footer>
+            <p>技术 © <a href="#">whero</a></p>
+        </footer>
+    </div>
+</body>
+<script src="/static/plugin/layui/layui.js" charset="utf-8"></script>
+<script src="/static/admin/js/config.js" charset="utf-8"></script>
+<script>
+layui.use(['form', 'aizxin'], function() {
+    var form = layui.form,
+        $ = layui.jquery,
+        aizxin = layui.aizxin;
+    layer = layui.layer;
+    //自定义验证规则
+    form.verify({
+        password: [/(.+){6,12}$/, '密码必须6到12位']
+    });
+    //监听提交
+    form.on('submit(login)', function(data) {
+        $.ajax({
+            type: 'POST',
+            url: "{{ url_for('admin.login') }}",
+            data: data.field,
+            dataType: 'json',
+            success: function(data) {
+                if (data.code) {
+                    aizxin.msgS(6, data.message, function() {
+                        window.location.href = "/admin"
+                    })
+                } else {
+                    aizxin.msgE(2, data.message)
+                }
+            },
+            error: function(xhr) {
+                aizxin.msgE(2, "系统错误！")
+            }
+        });
+        return false;
+    });
+});
+</script>
+=======
+    </body>
+    <script src="/static/plugin/layui/layui.js" charset="utf-8"></script>
+    <script src="/static/admin/js/config.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form', 'aizxin'], function() {
+            var form = layui.form,
+                $ = layui.jquery,
+                aizxin = layui.aizxin;
+            layer = layui.layer;
+            //自定义验证规则
+            form.verify({
+                password: [/(.+){6,12}$/, '密码必须6到12位']
+            });
+            //监听提交
+            form.on('submit(login)', function(data) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url_for('admin.login') }}",
+                    data: data.field,
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.code) {
+                            aizxin.msgS(6, data.message, function() {
+                                window.location.href = "/admin"
+                            })
+                        } else {
+                            aizxin.msgE(2, data.message)
+                        }
+                    },
+                    error: function(xhr) {
+                        aizxin.msgE(2, "系统错误！")
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+>>>>>>> ec7e4253cc5b5cadae23eeafe6c7ab948b4978e1
+
+</html>
