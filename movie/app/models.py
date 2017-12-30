@@ -55,6 +55,7 @@ class Userlog(db.Model):
 class Tag(db.Model):
     __tablename__ = "tag"
     id = db.Column(db.Integer, primary_key=True)  # 编号
+    sort = db.Column(db.Integer, default=0)  # 排序
     name = db.Column(db.String(100), unique=True)  # 标题
     addtime = db.Column(db.DateTime, index=True, default=datetime.now)  # 添加时间
     movies = db.relationship("Movie", backref='tag')  # 电影外键关系关联

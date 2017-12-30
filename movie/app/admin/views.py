@@ -52,3 +52,9 @@ def tag():
     if request.method == "POST":
         return jsonify({ 'code': False,'message': "账号密码错误！"})
     return render_template("admin/tag/index.html")
+
+# 标签添加或修改
+@admin.route('/tag/create/', defaults={'id': 0})
+@admin.route('/tag/create/<int:id>/', methods=["GET", "POST"])
+def tag_create(id=0):
+    return render_template("admin/tag/create.html")

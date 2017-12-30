@@ -3,7 +3,6 @@
  @Author：Sow
  @License：MIT
 */
-
 layui.define(['jquery', 'layer'], function(exports) {
     "use strict";
     var $ = layui.jquery,
