@@ -22,3 +22,10 @@ class LoginForm(FlaskForm):
         if admin == 0:
             raise ValidationError("账号不存在！")
 
+class TagForm(FlaskForm):
+    """标签"""
+    name = StringField(
+        validators=[
+            DataRequired("请输入标签！")
+        ]
+    )

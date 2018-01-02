@@ -1,12 +1,15 @@
 {% extends "admin/layout/base.html" %} {% block content %}
 <div style="padding: 15px;">
-    <div class="demoTable">
+    <!-- <div class="demoTable">
         搜索ID：
         <div class="layui-inline">
             <input class="layui-input" name="id" id="demoReload" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
-        <a class="layui-btn btn-tag-add">添加标签</a>
+    </div> -->
+    <div class="layui-btn-group" style="margin-top: 10px">
+        <button class="layui-btn btn-tag-add"><i class="layui-icon"></i>标签</button>
+        <button class="layui-btn layui-btn-danger btn-tag-delete"><i class="layui-icon"></i>批量删除</button>
     </div>
     <!-- <table class="layui-table" lay-data="{url:'http://www.layui.com/demo/table/user/', page:true, id:'idTest',cellMinWidth: 80}" lay-filter="demo">
         <thead>
@@ -33,8 +36,10 @@
 </div>
 {% endblock %} {% block script %}
 <script>
-layui.use(['global','aizxin','table'], function() {
-    var $ = layui.$,aizxin=layui.aizxin,table = layui.table;
+layui.use(['global', 'aizxin', 'table'], function() {
+    var $ = layui.$,
+        aizxin = layui.aizxin,
+        table = layui.table;
     // //监听表格复选框选择
     // table.on('checkbox(demo)', function(obj) {
     //     console.log(obj)
@@ -73,7 +78,7 @@ layui.use(['global','aizxin','table'], function() {
     //     };
 
     $('.btn-tag-add').on('click', function() {
-        aizxin.open('标签添加',"{{ url_for('admin.tag_create') }}",['469px','260px']);
+        aizxin.open('标签添加', "{{ url_for('admin.tag_create') }}", ['469px', '260px']);
     });
 });
 </script>
