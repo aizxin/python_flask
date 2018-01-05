@@ -45,37 +45,34 @@ def login():
     return render_template("admin/login.html",form=form)
 # 标签
 @admin.route("/tag/", methods=["GET", "POST"])
-def tag():    
+def tag():
+    if request.method  == "POST":
+        return {}
     return render_template("admin/tag/index.html")
 
 # 标签添加或修改
 @admin.route('/tag/create/', defaults={'id': 0})
 @admin.route('/tag/create/<int:id>/', methods=["GET", "POST"])
-def tag_create(id=0):g
+def tag_create(id=0):
     form = TagForm()
-    tag = Tag.query.get_or_404(id)
+    # tag = Tag.query.get_or_404(id)
+    tag = {}
+    if id > 0:
+        tag = Tag.query.get_or_404(id)
     if request.method == "POST":
         if form.validate_on_submit():
             data = form.data
-            if data["id"] > 0:
-                tag = Tag.query.filter_by(name=data["name"]).count()
-                if tag == 1:
-                    return jsonify({'code': False,'message': '名称已经存在！' })
-                tag = Tag(
-                    name=data["name"]
-                )
-                db.session.add(tag)                
-            else:
-
-            db.session.commit()
-            oplog = Oplog(
-                admin_id=session["admin_id"],
-                ip=request.remote_addr,
-                reason="添加标签%s" % data["name"]
-            )
-            db.session.add(oplog)
-            db.session.commit()
-            return jsonify({ 'code': True,'message': "添加标签成功！"})
+            # db.session.add(tag)                
+            # db.session.commit()
+            # oplog = Oplog(
+            #     admin_id=session["admin_id"],
+            #     ip=request.remote_addr,
+            #     reason="添加标签%s" % data["name"]
+            # )
+            # db.session.add(oplog)
+            # db.session.commit()
+            return jsonify({ 'code': True,'message': "添加标签成功！","data":data})
         else:
             return jsonify({'code': False,'message': errors_first(form.errors) })
+
     return render_template("admin/tag/create.html",form=form)

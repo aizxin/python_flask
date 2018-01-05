@@ -1,33 +1,56 @@
 {% extends "admin/layout/base.html" %} {% block content %}
-<div style="padding: 15px;">
-    <!-- <div class="demoTable">
-        搜索ID：
-        <div class="layui-inline">
-            <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+<div class="layui-mian-content">
+    <section class="panel panel-padding">
+        <form class="layui-form" id="schoolsearch">
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <select name="province" id="province" lay-filter="province"><option value="0">请选择地区</option><option value="110000">北京市</option><option value="120000">天津市</option><option value="130000">河北省</option><option value="140000">山西省</option><option value="150000">内蒙古自治区</option><option value="210000">辽宁省</option><option value="220000">吉林省</option><option value="230000">黑龙江省</option><option value="310000">上海市</option><option value="320000">江苏省</option><option value="330000">浙江省</option><option value="340000">安徽省</option><option value="350000">福建省</option><option value="360000">江西省</option><option value="370000">山东省</option><option value="410000">河南省</option><option value="420000">湖北省</option><option value="430000">湖南省</option><option value="440000">广东省</option><option value="450000">广西壮族自治区</option><option value="460000">海南省</option><option value="500000">重庆市</option><option value="510000">四川省</option><option value="520000">贵州省</option><option value="530000" selected="selected">云南省</option><option value="540000">西藏自治区</option><option value="610000">陕西省</option><option value="620000">甘肃省</option><option value="630000">青海省</option><option value="640000">宁夏回族自治区</option><option value="650000">新疆维吾尔自治区</option><option value="710000">台湾省</option><option value="810000">香港特别行政区</option><option value="820000">澳门特别行政区</option></select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择地区" value="云南省" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="0" class="">请选择地区</dd><dd lay-value="110000" class="">北京市</dd><dd lay-value="120000" class="">天津市</dd><dd lay-value="130000" class="">河北省</dd><dd lay-value="140000" class="">山西省</dd><dd lay-value="150000" class="">内蒙古自治区</dd><dd lay-value="210000" class="">辽宁省</dd><dd lay-value="220000" class="">吉林省</dd><dd lay-value="230000" class="">黑龙江省</dd><dd lay-value="310000" class="">上海市</dd><dd lay-value="320000" class="">江苏省</dd><dd lay-value="330000" class="">浙江省</dd><dd lay-value="340000" class="">安徽省</dd><dd lay-value="350000" class="">福建省</dd><dd lay-value="360000" class="">江西省</dd><dd lay-value="370000" class="">山东省</dd><dd lay-value="410000" class="">河南省</dd><dd lay-value="420000" class="">湖北省</dd><dd lay-value="430000" class="">湖南省</dd><dd lay-value="440000" class="">广东省</dd><dd lay-value="450000" class="">广西壮族自治区</dd><dd lay-value="460000" class="">海南省</dd><dd lay-value="500000" class="">重庆市</dd><dd lay-value="510000" class="">四川省</dd><dd lay-value="520000" class="">贵州省</dd><dd lay-value="530000" class="layui-this">云南省</dd><dd lay-value="540000" class="">西藏自治区</dd><dd lay-value="610000" class="">陕西省</dd><dd lay-value="620000" class="">甘肃省</dd><dd lay-value="630000" class="">青海省</dd><dd lay-value="640000" class="">宁夏回族自治区</dd><dd lay-value="650000" class="">新疆维吾尔自治区</dd><dd lay-value="710000" class="">台湾省</dd><dd lay-value="810000" class="">香港特别行政区</dd><dd lay-value="820000" class="">澳门特别行政区</dd></dl></div>
+                </div>
+                <div class="layui-input-inline city-city" style="display: none;">
+                    <select name="city" id="city" lay-filter="city">
+                        <option value="">请选择市</option>
+                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择市" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"></dl></div>
+                </div>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input class="layui-input" name="name" placeholder="驾校名称">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn" lay-submit="" lay-filter="searchSchool" type="button">查找</button>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="panel panel-padding">
+        <div class="group-button">
+            <button class="layui-btn layui-btn-small layui-btn-danger ajax-all">
+                <i class="layui-icon">&#xe640;</i>  批量删除
+            </button>
+            <button class="layui-btn layui-btn-small btn-tag-add">
+                <i class="layui-icon">&#xe61f;</i> 添加
+            </button>
         </div>
-        <button class="layui-btn" data-type="reload">搜索</button>
-    </div> -->
-    <div class="layui-btn-group" style="margin-top: 10px">
-        <button class="layui-btn btn-tag-add"><i class="layui-icon"></i>标签</button>
-        <button class="layui-btn layui-btn-danger btn-tag-delete"><i class="layui-icon"></i>批量删除</button>
-    </div>
-    <!-- <table class="layui-table" lay-data="{url:'http://www.layui.com/demo/table/user/', page:true, id:'idTest',cellMinWidth: 80}" lay-filter="demo">
-        <thead>
-            <tr>
-                <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                <th lay-data="{field:'id',sort: true, fixed: true}">ID</th>
-                <th lay-data="{field:'username'}">用户名</th>
-                <th lay-data="{field:'sex',sort: true}">性别</th>
-                <th lay-data="{field:'city'}">城市</th>
-                <th lay-data="{field:'sign', width:160}">签名</th>
-                <th lay-data="{field:'experience',sort: true}">积分</th>
-                <th lay-data="{field:'classify'}">职业</th>
-                <th lay-data="{field:'wealth', sort: true}">财富</th>
-                <th lay-data="{field:'score',sort: true, fixed: 'right'}">评分</th>
-                <th lay-data="{fixed: 'right', align:'center', toolbar: '#barDemo'}"></th>
-            </tr>
-        </thead>
-    </table> -->
+        <div id="list" class="layui-form">
+            <table class="layui-table" lay-data="{url:'http://www.layui.com/demo/table/user/', page:true, id:'idTest',cellMinWidth: 80}" lay-filter="demo">
+                <thead>
+                    <tr>
+                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                        <th lay-data="{field:'id',sort: true, fixed: true}">ID</th>
+                        <th lay-data="{field:'username'}">用户名</th>
+                        <th lay-data="{field:'sex',sort: true}">性别</th>
+                        <th lay-data="{field:'city'}">城市</th>
+                        <th lay-data="{field:'sign', width:160}">签名</th>
+                        <th lay-data="{field:'experience',sort: true}">积分</th>
+                        <th lay-data="{field:'classify'}">职业</th>
+                        <th lay-data="{field:'wealth', sort: true}">财富</th>
+                        <th lay-data="{field:'score',sort: true, fixed: 'right'}">评分</th>
+                        <th lay-data="{fixed: 'right', align:'center', toolbar: '#barDemo'}"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -58,28 +81,6 @@ layui.use(['global', 'aizxin', 'table'], function() {
     //         layer.alert('编辑行：<br>' + JSON.stringify(data))
     //     }
     // });
-
-    // var $ = layui.$,
-    //     active = {
-    //         getCheckData: function() { //获取选中数据
-    //             var checkStatus = table.checkStatus('idTest'),
-    //                 data = checkStatus.data;
-    //             layer.alert(JSON.stringify(data));
-    //         },
-    //         getCheckLength: function() { //获取选中数目
-    //             var checkStatus = table.checkStatus('idTest'),
-    //                 data = checkStatus.data;
-    //             layer.msg('选中了：' + data.length + ' 个');
-    //         },
-    //         isAll: function() { //验证是否全选
-    //             var checkStatus = table.checkStatus('idTest');
-    //             layer.msg(checkStatus.isAll ? '全选' : '未全选')
-    //         }
-    //     };
-
-    $('.btn-tag-add').on('click', function() {
-        aizxin.open('标签添加', "{{ url_for('admin.tag_create') }}", ['469px', '260px']);
-    });
 });
 </script>
 {% endblock %}

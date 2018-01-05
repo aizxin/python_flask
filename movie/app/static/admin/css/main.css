@@ -23,6 +23,9 @@ html {
     text-align: center;
 }
 
+.layui-mian-content{
+    padding: 15px;
+}
 
 /* 适配多设备 */
 
@@ -88,7 +91,29 @@ html {
         text-align: center;
     }
 }
+.layui-table-view .layui-form-checkbox {
+    top: 8px;
+    height: 26px;
+    line-height: 26px;
+}
 table .layui-table-cell .layui-form-checkbox[lay-skin=primary] {
     top: 4px !important
-    vertical-align: middle;
+}
+.layui-body{
+    background-color: #f2f2f2;
+}
+.panel-padding {
+    padding: 20px 10px;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.layui-form-item {
+    margin-bottom: 0px;
+    clear: both;
 }
