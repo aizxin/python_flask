@@ -1,6 +1,6 @@
 #coding:utf8
 
-from flask import render_template, jsonify, request,session
+from flask import render_template, jsonify, request,session,make_response
 from . import admin
 from app.models import Admin,Tag,Adminlog,Oplog
 from app.admin.forms import LoginForm,TagForm
@@ -15,10 +15,6 @@ def errors_first(errors):
 
 @admin.route("/")
 def index():
-    page_data = Tag.query.order_by(
-        Tag.addtime.desc()
-    ).paginate(page=1, per_page=10)
-    print(page_data)
     return render_template("admin/index.html")
 
 # 登录
@@ -47,7 +43,11 @@ def login():
 @admin.route("/tag/", methods=["GET", "POST"])
 def tag():
     if request.method  == "POST":
-        return {}
+        paginationData = Tag.query.order_by(
+            Tag.addtime.desc()
+        ).paginate(int(request.values.get('page',1)),int(request.values.get('limit',10)))
+        result = [d.get_dict() for d in paginationData.items]
+        return jsonify({ 'code': 0,'message': "登录成功！","data":result,"count":paginationData.total})
     return render_template("admin/tag/index.html")
 
 # 标签添加或修改

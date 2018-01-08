@@ -63,6 +63,14 @@ class Tag(db.Model):
     def __repr__(self):
         return "<Tag %r>" % self.name
 
+    def get_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'sort': self.sort,
+            'pub_date': self.addtime.strftime('%Y-%m-%d %H:%M'),
+        }
+
 
 # 电影
 class Movie(db.Model):

@@ -32,23 +32,7 @@
             </button>
         </div>
         <div id="list" class="layui-form">
-            <table class="layui-table" lay-data="{url:'http://www.layui.com/demo/table/user/', page:true, id:'idTest',cellMinWidth: 80}" lay-filter="demo">
-                <thead>
-                    <tr>
-                        <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-                        <th lay-data="{field:'id',sort: true, fixed: true}">ID</th>
-                        <th lay-data="{field:'username'}">用户名</th>
-                        <th lay-data="{field:'sex',sort: true}">性别</th>
-                        <th lay-data="{field:'city'}">城市</th>
-                        <th lay-data="{field:'sign', width:160}">签名</th>
-                        <th lay-data="{field:'experience',sort: true}">积分</th>
-                        <th lay-data="{field:'classify'}">职业</th>
-                        <th lay-data="{field:'wealth', sort: true}">财富</th>
-                        <th lay-data="{field:'score',sort: true, fixed: 'right'}">评分</th>
-                        <th lay-data="{fixed: 'right', align:'center', toolbar: '#barDemo'}"></th>
-                    </tr>
-                </thead>
-            </table>
+            <table class="layui-hide" id="test"></table>
         </div>
     </section>
     <script type="text/html" id="barDemo">
@@ -63,6 +47,23 @@ layui.use(['global', 'aizxin', 'table'], function() {
     var $ = layui.$,
         aizxin = layui.aizxin,
         table = layui.table;
+    table.render({
+        elem: '#test'
+        ,url:"{{ url_for('admin.tag') }}"
+        ,method:'POST'
+        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+        ,cols: [[
+            {field:'id', width:80, title: 'ID', sort: true}
+            ,{field:'username', width:80, title: '用户名'}
+            ,{field:'sex', width:80, title: '性别', sort: true}
+            ,{field:'city', width:80, title: '城市'}
+            ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            ,{field:'experience', title: '积分', sort: true}
+            ,{field:'score', title: '评分', sort: true}
+            ,{field:'classify', title: '职业'}
+            ,{field:'wealth', width:137, title: '财富', sort: true}
+        ]]
+    });
     // //监听表格复选框选择
     // table.on('checkbox(demo)', function(obj) {
     //     console.log(obj)
