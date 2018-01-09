@@ -24,21 +24,20 @@
     </section>
     <section class="panel panel-padding">
         <div class="group-button">
-            <button class="layui-btn layui-btn-small layui-btn-danger ajax-all">
+            <button class="layui-btn layui-btn-small layui-btn-sm layui-btn-danger ajax-all">
                 <i class="layui-icon">&#xe640;</i>  批量删除
             </button>
-            <button class="layui-btn layui-btn-small btn-tag-add">
+            <button class="layui-btn layui-btn-small layui-btn-sm btn-tag-add">
                 <i class="layui-icon">&#xe61f;</i> 添加
             </button>
         </div>
         <div id="list" class="layui-form">
-            <table class="layui-hide" id="test"></table>
+            <table class="layui-hide" id="tagTable"></table>
         </div>
     </section>
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
     </script>
 </div>
 {% endblock %} {% block script %}
@@ -48,22 +47,21 @@ layui.use(['global', 'aizxin', 'table'], function() {
         aizxin = layui.aizxin,
         table = layui.table;
     table.render({
-        elem: '#test'
+        elem: '#tagTable'
         ,url:"{{ url_for('admin.tag') }}"
         ,method:'POST'
         ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
         ,cols: [[
-            {field:'id', width:80, title: 'ID', sort: true}
-            ,{field:'username', width:80, title: '用户名'}
-            ,{field:'sex', width:80, title: '性别', sort: true}
-            ,{field:'city', width:80, title: '城市'}
-            ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-            ,{field:'experience', title: '积分', sort: true}
-            ,{field:'score', title: '评分', sort: true}
-            ,{field:'classify', title: '职业'}
-            ,{field:'wealth', width:137, title: '财富', sort: true}
+            {type:'checkbox', fixed: 'left'},
+            {field:'id', title: 'ID', sort: true}
+            ,{field:'name', title: '名称'}
+            ,{field:'sort', title: '排序', sort: true}
+            ,{fixed: 'right', title: '操作', align:'center', toolbar: '#barDemo'}
         ]]
     });
+    $('.btn-tag-add').on('click',function(){
+        aizxin.open("标签添加", "{{ url_for('admin.tag_create') }}", ['350px','211px'])
+    })
     // //监听表格复选框选择
     // table.on('checkbox(demo)', function(obj) {
     //     console.log(obj)
