@@ -47,7 +47,7 @@ def tag():
             Tag.addtime.desc()
         ).paginate(int(request.values.get('page',1)),int(request.values.get('limit',10)))
         result = [d.get_dict() for d in paginationData.items]
-        return jsonify({ 'code': 0,'message': "登录成功！","data":result,"count":paginationData.total})
+        return jsonify({ 'code': 0,'message': "获取成功","data":result,"count":paginationData.total})
     return render_template("admin/tag/index.html")
 
 # 标签添加或修改
